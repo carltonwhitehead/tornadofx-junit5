@@ -64,8 +64,10 @@ class TornadoFxAppExtension : TestInstancePostProcessor,
 
     private fun findAppProperty(testInstance: Any): KMutableProperty1<Any, tornadofx.App>? {
         return testInstance::class.declaredMemberProperties.singleOrNull { property ->
-            property.returnType.isSubtypeOf(tornadofx.App::class.starProjectedType)
-                    && property.findAnnotation<App>() != null
+            property.findAnnotation<App>() != null
+                    && property.returnType.isSubtypeOf(
+                    tornadofx.App::class.starProjectedType.withNullability(true)
+            )
         }?.apply {
             isAccessible = true
         } as? KMutableProperty1<Any, tornadofx.App>?
