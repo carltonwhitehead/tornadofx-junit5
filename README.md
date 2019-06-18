@@ -5,7 +5,7 @@ These extensions expand on [TestFX](https://github.com/TestFX/TestFX)'s JUnit 5 
 
 ## TornadoFxViewExtension
 
-- Convenient callbacks to set up and tear down `View` instances under test.
+- Convenient callbacks to set up and tear down the annotated `@View` instance under test.
     - `@Init`: Make any preparations and then `find()` the view.
     - `@Start`: Optionally customize the `Stage` for your view. By default the extension will create a `Scene` with your view's root and show the `Stage`.
     - `@Stop`: Optionally clean up after your test instance.
@@ -23,7 +23,7 @@ Basic example:
 @ExtendWidth(TornadoFxViewExtension::class)
 class SomeViewTest {
     @View
-    private lateinit var view: SomeView
+    lateinit var view: SomeView
     
     @Init
     fun init(scope: Scope) {
@@ -41,7 +41,7 @@ class SomeViewTest {
 
 ## TornadoFxAppExtension
 
-- Convenient callbacks to set up and tear down `App` instances under test.
+- Convenient callbacks to set up and tear down the annotated `@App` instance under test.
     - `@Init`: Make any preparations prior to creating your app instance.
     - `@SetupApp`: Instantiate and return your `App` instance.
     - `@Start`: Optionally use a `FxRobot` to put your app into a certain state prior to each `@Test` function.
@@ -58,16 +58,14 @@ Basic example:
 class SomeAppTest {
 
     @App
-    private lateinit var app: SomeApp
+    lateinit var app: SomeApp
 
     @SetupApp
-    fun setupApp(): SomeTestApp {
-        return SimpleTestApp()
-    }
+    fun setupApp() = SomeApp()
 
     @Test
     fun itShouldStartAppAutomatically(stage: Stage) {
-        val view = find<SomeTestView>(app.scope)
+        val view = find<SomeView>(app.scope)
         Assertions.assertThat(stage.isShowing).isTrue()
         Assertions.assertThat(view.currentStage).isSameAs(stage)
     }
