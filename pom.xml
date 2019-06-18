@@ -70,5 +70,12 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray-carlton-whitehead-tornadofx-junit5</id>
+            <name>carlton-whitehead-tornadofx-junit5</name>
+            <url>https://api.bintray.com/maven/carlton-whitehead/tornadofx-junit5/tornadofx-junit5/;publish=1</url>
+        </repository>
+    </distributionManagement>
 
 </project>
