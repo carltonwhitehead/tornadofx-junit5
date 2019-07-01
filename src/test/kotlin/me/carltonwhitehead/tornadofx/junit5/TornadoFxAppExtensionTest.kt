@@ -19,7 +19,7 @@ class TornadoFxAppExtensionTest {
     @Init
     fun init() {
         initCalled = true
-        Assertions.assertThat(Platform.isFxApplicationThread()).isTrue()
+        Assertions.assertThat(Platform.isFxApplicationThread()).isFalse()
     }
 
     @SetupApp
@@ -33,7 +33,7 @@ class TornadoFxAppExtensionTest {
     fun start(robot: FxRobot) {
         startCalled = true
         Assertions.assertThat(app).isNotNull
-        Assertions.assertThat(Platform.isFxApplicationThread()).isTrue()
+        Assertions.assertThat(Platform.isFxApplicationThread()).isFalse()
     }
 
     @Test
@@ -47,7 +47,7 @@ class TornadoFxAppExtensionTest {
     @Stop
     fun stop() {
         stopCalled = true
-        Assertions.assertThat(Platform.isFxApplicationThread()).isTrue()
+        Assertions.assertThat(Platform.isFxApplicationThread()).isFalse()
     }
 
     companion object {

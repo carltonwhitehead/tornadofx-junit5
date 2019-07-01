@@ -113,7 +113,7 @@ class TornadoFxAppExtension : TestInstancePostProcessor,
         context.stage = FxToolkit.registerPrimaryStage()
         context.robot = FxRobot()
         fixture.init?.run {
-            FX.runAndWait { call(context.testInstance.get()) }
+             call(context.testInstance.get())
         }
         val app = FxToolkit.setupApplication {
             fixture.setupApp.call(context.testInstance.get()) as tornadofx.App
@@ -121,13 +121,13 @@ class TornadoFxAppExtension : TestInstancePostProcessor,
         context.app = app
         fixture.app?.set(context.testInstance.get(), app)
         fixture.start?.run {
-            FX.runAndWait { call(context.testInstance.get(), context.robot!!) }
+             call(context.testInstance.get(), context.robot!!)
         }
     }
 
     override fun afterEach(context: ExtensionContext) {
         val fixture = context.fixture!!
-        FX.runAndWait { fixture.stop?.call(context.testInstance.get()) }
+        fixture.stop?.call(context.testInstance.get())
         FX.runAndWait { context.stage!!.close() }
         FxToolkit.cleanupApplication(context.app!!)
         FxToolkit.cleanupStages()

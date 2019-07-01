@@ -46,7 +46,6 @@ class SomeViewTest {
     - `@SetupApp`: Instantiate and return your `App` instance.
     - `@Start`: Optionally use a `FxRobot` to put your app into a certain state prior to each `@Test` function.
     - `@Stop`: Optionally clean up after your test instance.
-- All callbacks occur on the FX application thread which reduces boilerplate. 
 - Inject parameters into your test method:
     - `Stage`
     - `FxRobot`
